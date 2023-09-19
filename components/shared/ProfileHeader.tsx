@@ -25,12 +25,12 @@ function ProfileHeader({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="relative h-20 w-20 object-cover">
-            {/*<Image
+            <Image
               src={imgUrl}
               alt="logo"
               fill
               className="rounded-full object-cover shadow-2xl"
-            />*/}
+            />
           </div>
 
           <div className="flex-1">

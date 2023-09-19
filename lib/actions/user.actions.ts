@@ -1,10 +1,11 @@
 "use server";
 
+import { FilterQuery, SortOrder } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { connectToDB } from "../mongoose";
 import User from "../models/user.models";
 import Thread from "../models/thread.model";
-import { FilterQuery, SortOrder } from "mongoose";
+import Community from "../models/community.model";
 
 interface Params {
   userId: string;
@@ -49,11 +50,10 @@ export async function updateUser({
 export async function fetchUser(userId: string) {
   try {
     connectToDB();
-    return await User.findOne({ id: userId });
-    // .populate({
-    //  path: 'communities',
-    //  model: community
-    //})
+    return await User.findOne({ id: userId }).populate({
+      path: "communities",
+      model: Community,
+    });
   } catch (error: any) {
     throw new Error(`Faild to fetch user: ${error.message}`);
   }
